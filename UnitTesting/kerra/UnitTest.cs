@@ -12,14 +12,14 @@ namespace UnitTesting.kerra
         }
 
         [Fact]
-        public void FindRootPositiveNumber_ShouldReturnCorrectRoot()
+        public void Sqrt_FindRootPositiveNumber_ShouldReturnCorrectRoot()
         {
             double result = _calculator.Sqrt(25.0);
             Assert.Equal(5, result);
         }
 
         [Fact]
-        public void FindRootNegativeNumber_ArgumentOutOfRangeException()
+        public void Sqrt_FindRootNegativeNumber_ArgumentOutOfRangeException()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _calculator.Sqrt(-25.0));
         }
