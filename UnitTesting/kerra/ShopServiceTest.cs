@@ -19,7 +19,7 @@ namespace UnitTesting.kerra
         }
 
         [Fact]
-        public void CreateOrder_ShouldAddOrderAndSendNotification()
+        public void CreateOrder_ShouldAddOrder()
         {
             var customer = new Customer { Id = 1, Name = "ааа", Email = "ааааа" };
             var order = new Order { Id = 1, Amount = 100, Customer = customer };
@@ -27,10 +27,19 @@ namespace UnitTesting.kerra
             _shopService.CreateOrder(order);
 
             _mockOrderRepository.Verify(repo => repo.AddOrder(order), Times.Once);
+        }
+
+        [Fact]
+        public void SendNotification_ShouldSendCorrectNotification()
+        {
+            var customer = new Customer { Id = 1, Name = "ааа", Email = "ааааа" };
+            var order = new Order { Id = 1, Amount = 100, Customer = customer };
+
+            _shopService.CreateOrder(order);
+
             _mockNotificationService.Verify(service => service.SendNotification(
                 order.Customer.Email,
                 $"Order {order.Id} created for customer {order.Customer.Name} total price {order.Amount}"), Times.Once);
-
         }
 
         [Fact]
